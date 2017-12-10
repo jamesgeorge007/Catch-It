@@ -61,13 +61,25 @@ def game_play():
 
     basket_image = pygame.image.load('../res/images/small_basket.jpg')
 
-    egg_images = ['../res/images/1.jpg', '../res/images/2.jpg', '../res/images/3.jpg', '../res/images/4.jpg', '../res/images/5.jpg', '../res/images/6.jpg', '../res/images/7.gif', '../res/images/9.jpg']
+    egg_images = ['../res/images/1.jpg', '../res/images/2.jpg', '../res/images/3.jpg', '../res/images/4.jpg', '../res/images/5.jpg', '../res/images/6.jpg', '../res/images/7.gif', '../res/images/8.jpg', '../res/images/9.jpg', '../res/images/bomb.png']
 
-    bomb_image = pygame.image.load('../res/images/bomb.png')
+    bomb_image = pygame.image.load(egg_images[9])
 
     basket = pygame.image.load('../res/images/basket.jpg')
 
-    minion = pygame.image.load('../res/images/8.jpg')
+    minion = pygame.image.load(egg_images[7])
+
+    # Initializing the speed variable which denotes the speed with which the images move.
+
+    image_speed=3
+
+    # Intialiaing the score variable.
+
+    score=0
+
+    # Pixels being moved by the basket under keystrokes (10 px)
+
+    unit = 7
 
     # Initialising a boolean variable user_click to False to keep track of the user clicking any button in the main menu
 
@@ -88,6 +100,10 @@ def game_play():
     # 3. Best Scores button
 
     best_scores_clicked = False
+
+    # Intialising game over variable.
+
+    game_over = False
 
     # Main Menu with 3 Buttons
 
@@ -242,14 +258,17 @@ def game_play():
 
     # Randomly loading Egg images
 
-    random_eggs = pygame.image.load(egg_images[random.randint(0, 7)])
+    random_images = egg_images[random.randint(0, 9)]
+
+    random_eggs = pygame.image.load(random_images)
 
     # Game in action !!!
 
     while play_clicked:
 
-        # New game window is created on clicking the play button with the same dimensions
+        # New game window is created on clicking the play button with the same dimensions.
         play_window=pygame.display.set_mode((1250,680))
+
         pygame.display.set_caption('Play')
 
         play_window.fill((255,255,255))
@@ -258,19 +277,15 @@ def game_play():
 
         play_window.blit(random_eggs, (x, y))
 
-        # Placing the Basket in position
-
-        play_window.blit(basket, (basket_x, basket_y))
-
-        # Horizontal line carrying the basket
+        # Horizontal line carrying the basket.
 
         pygame.draw.line(play_window, (175, 115, 0), (0, display_height - 20), (display_width, display_height - 20))
 
+        # Color beneath the line.
+
+        pygame.draw.rect(play_window, (243, 128, 12), (0, display_height - 18, display_width, display_height))
+
         for event in pygame.event.get():
-
-            # Pixels being moved by the basket under keystrokes (10 px)
-            unit=7
-
 
             # Event Handlings
             if event.type == pygame.QUIT:
@@ -278,7 +293,7 @@ def game_play():
                 pygame.quit()
                 sys.exit()
 
-            if event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
 
                 if event.key == pygame.K_RIGHT:
 
@@ -288,27 +303,45 @@ def game_play():
 
                     x_change = -unit
 
-            '''elif event.type == pygame.KEYUP:
+                elif event.key == pygame.K_DOWN:
 
-                if event.key == pygame.K_RIGHT or pygame.K_LEFT:
-
-                    pass'''
+                    x_change = 0
 
         basket_x += x_change
 
-        y+=5
+        y += image_speed
+
+        # Placing the Basket in position
+
+        play_window.blit(basket, (basket_x, basket_y))
+
+        # Placing score on the game window.
+
+        setText("Your Score:" + str(score), 40, (0, 0), (0, 0, 0))
 
         # Checking egg and basket crossover.
 
-        if y >= basket_y:
+        if y+100 >= basket_y and y+100 <= basket_y+15:
 
-            if x == basket_x:
+            if x >= basket_x-40 and x + 100 <= basket_x +display_width/2-220:
 
-               y = basket_y
+               # Checks collision with bomb and minion image
+
+               if random_images == egg_images[9] or random_images == egg_images[7]:
+
+                   setText("Crashed", 150, (display_width/2 - 150, 35), (0, 0, 0))
+                   time.sleep(5)
+                   game_over = True
+                   play_clicked = False
+
+               # Makes the egg disappear !
+               y = display_height
+
+               score+=1
 
         # Checking whether the egg image had crossed the floor.
 
-        if y >= display_height+200:
+        if y>= display_height+200:
 
             # Random positions for eggs
 
@@ -317,7 +350,21 @@ def game_play():
 
             # Randomly loading Egg images
 
-            random_eggs = pygame.image.load(egg_images[random.randint(0, 7)])
+            random_images = egg_images[random.randint(0,9)]
+
+            random_eggs = pygame.image.load(random_images)
+
+            # Increasing the speed in which the basket moves both the directions.
+
+            if unit != 15:
+
+                unit += 1
+
+            # Increasing the speed in which the images moves down.
+
+            if image_speed != 16:
+
+                image_speed += 1
 
 
         # Restricting the basket within the width of the Game window
@@ -332,6 +379,12 @@ def game_play():
 
         pygame.display.update()
         play_clock.tick(60)
+
+
+    # Game Over window
+    while game_over:
+
+        break
 
 
 if __name__ == '__main__':
