@@ -121,7 +121,9 @@ def game_play():
     pygame.draw.line(gameDisplay, (25, 120, 220), (display_width / 2 - 340, 168), (display_width/2+330, 168))
     pygame.draw.line(gameDisplay, (220, 20, 125), (display_width / 2 - 340, 170), (display_width/2+330, 170))
 
-    gameDisplay.blit(bomb_image, (display_width/2+300, 5))
+    pygame.time.wait(1000)
+
+    gameDisplay.blit(bomb_image, (display_width/2+340, 25))
 
     ''' start = display_height+40
     end = 299
@@ -145,16 +147,24 @@ def game_play():
         q+=j
         gameDisplay.blit(minion_image, (display_width/2-465, q))
         pygame.time.wait(10)'''
+
+    time.sleep(1)
+
     # Play Button
     pygame.draw.rect(gameDisplay, (225, 10, 20), (display_width / 2 - 100, 260, 230, 100))
 
     # Setting Play text on the button with setText() method
     setText("Play !", 80, (530, 260), (255, 255, 255), None, "forte")
+
+    time.sleep(1)
+
     # Instructions Button
     pygame.draw.rect(gameDisplay, (30, 220, 20), (display_width / 2 - 200, 400, 440, 100))
 
     # Setting Instructions text on the button with setText() method
     setText("Instructions", 80, (435, 400), (255, 255, 255), None, "forte")
+
+    time.sleep(1)
 
     # Best Scores Button
     pygame.draw.rect(gameDisplay, (30, 22, 240), (display_width / 2 - 200, 540, 440, 100))
@@ -246,7 +256,7 @@ def game_play():
     # X and Y co-ordinates of the basket.
     basket_x = display_width/2-200
 
-    basket_y = display_height-320
+    basket_y = display_height-270
 
     # For changing the X co-ordinate of the basket when appropriate keys are pressed.
     x_change=0
@@ -317,20 +327,29 @@ def game_play():
 
         # Placing score on the game window.
 
-        setText("Your Score:" + str(score), 40, (0, 0), (0, 0, 0))
+        setText("Your Score:" + str(score), 40, (0, 0), (107, 20, 99), (128, 255, 255))
 
         # Checking egg and basket crossover.
 
-        if y+100 >= basket_y and y+100 <= basket_y+15:
+        if y+80 >= basket_y and y+80 <= basket_y+15:
 
-            if x >= basket_x-40 and x + 100 <= basket_x +display_width/2-220:
+            if x >= basket_x-40 and x + 100 <= basket_x +display_width/2-240:
 
                # Checks collision with bomb and minion image
 
                if random_images == egg_images[9] or random_images == egg_images[7]:
 
                    setText("Crashed", 150, (display_width/2 - 150, 35), (0, 0, 0))
-                   time.sleep(5)
+                   setText(None, 40, (0, 0), (255, 255, 255))
+                   time.sleep(3)
+
+                   for k in range(0, display_width+1, 5):
+
+                        setText("Your Score:" + str(score), 40, (k, 0), (107, 20, 99), (128, 255, 255),)
+                        pygame.time.wait(20)
+
+                   time.sleep(2)
+
                    game_over = True
                    play_clicked = False
 
@@ -384,8 +403,49 @@ def game_play():
     # Game Over window
     while game_over:
 
-        break
+        game_over_window = pygame.display.set_mode((display_width, display_height))
 
+        pygame.display.set_caption("Game Over Buddy!")
+
+        game_over_window.fill((188, 7, 116))
+
+        setText("G", 90, (180, 250), (255, 255, 255), None, "Elephant")
+
+        pygame.time.wait(1000)
+
+        setText("A", 90, (270, 250), (255, 255, 255), None, "Elephant")
+
+        pygame.time.wait(1000)
+
+        setText("M", 90, (360, 250), (255, 255, 255), None, "Elephant")
+
+        pygame.time.wait(1000)
+
+        setText("E", 90, (450, 250), (255, 255, 255), None, "Elephant")
+
+        pygame.time.wait(1000)
+
+        setText("O", 90, (630, 250), (5, 96, 196), None, "Elephant")
+
+        pygame.time.wait(1000)
+
+        setText("V", 90, (720, 250), (5, 96, 196), None, "Elephant")
+
+        pygame.time.wait(1000)
+
+        setText("E", 90, (810, 250), (5, 96, 196), None, "Elephant")
+
+        pygame.time.wait(1000)
+
+        setText("R", 90, (900, 250), (5, 96, 196), None, "Elephant")
+
+        pygame.draw.rect(game_over_window, (244, 122, 11), (display_width / 2 - 100, 400, 165, 140))
+
+        pygame.time.wait(5000)
+
+        pygame.display.update()
+
+        break
 
 if __name__ == '__main__':
     game_play()
