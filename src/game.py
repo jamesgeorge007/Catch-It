@@ -125,12 +125,12 @@ def game_play():
 
     gameDisplay.blit(bomb_image, (display_width/2+340, 25))
 
-    ''' start = display_height+40
+    start = display_height+40
     end = 299
     value = 0
 
     # Setting the basket image to move from start to end.
-    while start>= end:
+    '''while start>= end:
 
         gameDisplay.blit(basket_image, (display_width/2-550, start))
         start-= value
@@ -142,7 +142,7 @@ def game_play():
 
     gameDisplay.blit(minion_image, (display_width / 2 - 470, 355))
 
-    '''q = 0
+    ''' q = 0
     for j in range(-20, 346):
         q+=j
         gameDisplay.blit(minion_image, (display_width/2-465, q))
@@ -339,7 +339,7 @@ def game_play():
 
                if random_images == egg_images[9] or random_images == egg_images[7]:
 
-                   setText("Crashed", 150, (display_width/2 - 150, 35), (0, 0, 0))
+                   setText("Crashed", 150, (display_width/2 - 220, 35), (0, 0, 0))
                    setText(None, 40, (0, 0), (255, 255, 255))
                    time.sleep(3)
 
@@ -399,53 +399,107 @@ def game_play():
         pygame.display.update()
         play_clock.tick(60)
 
+        # Game Over window
 
-    # Game Over window
-    while game_over:
+        # To prevent GAME OVER being displayed infinitely.
+        track = 0
 
-        game_over_window = pygame.display.set_mode((display_width, display_height))
+        while game_over:
 
-        pygame.display.set_caption("Game Over Buddy!")
+            game_over_window = pygame.display.set_mode((display_width, display_height))
 
-        game_over_window.fill((188, 7, 116))
+            pygame.display.set_caption("Game Over Buddy!")
 
-        setText("G", 90, (180, 250), (255, 255, 255), None, "Elephant")
+            game_over_window.fill((188, 7, 116))
 
-        pygame.time.wait(1000)
+            for event in pygame.event.get():
 
-        setText("A", 90, (270, 250), (255, 255, 255), None, "Elephant")
+                if event.type == pygame.QUIT:
 
-        pygame.time.wait(1000)
+                    pygame.quit()
+                    sys.exit()
 
-        setText("M", 90, (360, 250), (255, 255, 255), None, "Elephant")
+                mouse = pygame.mouse.get_pos()
 
-        pygame.time.wait(1000)
+                if display_width / 2 + 220 > mouse[0] > display_width / 2 - 200 and 510 > mouse[1] > 420:
 
-        setText("E", 90, (450, 250), (255, 255, 255), None, "Elephant")
+                    pygame.draw.rect(game_over_window, (128, 128, 255), (display_width / 2 - 200, 420, 420, 90))
 
-        pygame.time.wait(1000)
+                    setText("Back to Main Menu", 50, (display_width / 2 - 190, 430), (255, 0, 0))
 
-        setText("O", 90, (630, 250), (5, 96, 196), None, "Elephant")
+                    if event.type == pygame.MOUSEBUTTONDOWN:
 
-        pygame.time.wait(1000)
+                        game_over = False
+                        game_play()
 
-        setText("V", 90, (720, 250), (5, 96, 196), None, "Elephant")
+                else:
 
-        pygame.time.wait(1000)
+                    pygame.draw.rect(game_over_window, (244, 122, 11), (display_width / 2 - 200, 420, 420, 90))
 
-        setText("E", 90, (810, 250), (5, 96, 196), None, "Elephant")
+                    setText("Back to Main Menu", 50, (display_width / 2 - 190, 430), (255, 255, 255))
 
-        pygame.time.wait(1000)
+                if display_width / 2 + 70 > mouse[0] > display_width / 2 - 110 and 645 > mouse[1] > 540:
 
-        setText("R", 90, (900, 250), (5, 96, 196), None, "Elephant")
+                     pygame.draw.rect(game_over_window, (255, 255, 0), (display_width / 2 - 110, 540, 170, 105))
 
-        pygame.draw.rect(game_over_window, (244, 122, 11), (display_width / 2 - 100, 400, 165, 140))
+                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
 
-        pygame.time.wait(5000)
+                     if event.type == pygame.MOUSEBUTTONDOWN:
 
-        pygame.display.update()
+                         credit_clicked = True
+                         game_over = False
 
-        break
+                else:
+
+                     pygame.draw.rect(game_over_window, (255, 255, 255), (display_width / 2 - 110, 540, 170, 105))
+
+                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
+
+            if track == 0:
+
+                setText("G", 90, (180, 250), (255, 255, 255), None, "Elephant")
+
+                pygame.time.wait(400)
+
+                setText("A", 90, (270, 250), (255, 255, 255), None, "Elephant")
+
+                pygame.time.wait(400)
+
+                setText("M", 90, (360, 250), (255, 255, 255), None, "Elephant")
+
+                pygame.time.wait(400)
+
+                setText("E", 90, (460, 250), (255, 255, 255), None, "Elephant")
+
+                pygame.time.wait(400)
+
+                setText("O", 90, (630, 250), (5, 96, 196), None, "Elephant")
+
+                pygame.time.wait(400)
+
+                setText("V", 90, (720, 250), (5, 96, 196), None, "Elephant")
+
+                pygame.time.wait(400)
+
+                setText("E", 90, (810, 250), (5, 96, 196), None, "Elephant")
+
+                pygame.time.wait(400)
+
+                setText("R", 90, (900, 250), (5, 96, 196), None, "Elephant")
+
+                pygame.time.wait(400)
+
+                track = 1
+
+            pygame.draw.rect(game_over_window, (244, 122, 11), (display_width / 2 - 200, 420, 420, 90))
+
+            setText("Back to Main Menu", 50, (display_width / 2 - 190, 430), (255, 255, 255))
+
+            pygame.draw.rect(game_over_window, (255, 255, 255), (display_width / 2 - 110, 540, 170, 105))
+
+            setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
+
+            pygame.display.update()
 
 if __name__ == '__main__':
     game_play()
