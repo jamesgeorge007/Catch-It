@@ -251,9 +251,17 @@ def game_play():
     # Shows  previous best high score stored in files in the same directory where the game lies
     while best_scores_clicked:
 
-        gameDisplay.fill((255, 0, 0))
-        best_scores_clicked = False
-        game_play()
+        score_window = pygame.display.set_mode((display_width, display_height)) 
+
+        pygame.display.set_caption('Best Score')
+
+        score_window.fill((255, 255, 255))
+
+        setText("High Score", 120, (display_width / 2 - 280, 50), (128, 187, 128), None, "Algerian")
+
+        time.sleep(5)
+
+        break
 
     # X and Y co-ordinates of the basket.
     basket_x = display_width/2-200
@@ -345,7 +353,7 @@ def game_play():
                    setText("Your Score:" + str(score), 40, (0, 0), (107, 20, 99), (128, 255, 255))
                    setText("Crashed", 150, (display_width/2 - 240, 35), (0, 0, 0))
                    setText(None, 40, (0, 0), (255, 255, 255))
-                   play_window.blit(explosion, (basket_x + 20, basket_y - 20))
+                   play_window.blit(explosion, (basket_x, basket_y - 80))
                    pygame.display.update()
 
                    time.sleep(3)
@@ -474,7 +482,7 @@ def game_play():
 
                 else:
 
-                    pygame.draw.rect(game_over_window, (255, 255, 255), (display_width / 2 - 110, 540, 180, 95))
+                    pygame.draw.rect(game_over_window, (255, 255, 128), (display_width / 2 - 110, 540, 180, 95))
 
                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
 
