@@ -69,6 +69,8 @@ def game_play():
 
     minion = pygame.image.load(egg_images[7])
 
+    explosion = pygame.image.load('../res/images/explosion.gif')
+
     # Initializing the speed variable which denotes the speed with which the images move.
 
     image_speed=3
@@ -108,12 +110,12 @@ def game_play():
     # Main Menu with 3 Buttons
 
     # Setting white background to the game window
-    gameDisplay.fill((255, 255, 255))
+    gameDisplay.fill((0, 255, 255))
 
     # The Title moving up and positioning itself in the required co-ordinates.
     for i in range(display_height+100, 14, -10):
 
-        setText("Catch It!!", 140, (display_width / 2 - 340, i), (125, 20, 220), (255, 255, 255), "Algerian")
+        setText("Catch It!!", 140, (display_width / 2 - 340, i), (125, 20, 220), (0, 255, 255), "Algerian")
         pygame.time.wait(5)
 
     # Underlines
@@ -339,8 +341,13 @@ def game_play():
 
                if random_images == egg_images[9] or random_images == egg_images[7]:
 
-                   setText("Crashed", 150, (display_width/2 - 220, 35), (0, 0, 0))
+                   score -= 5
+                   setText("Your Score:" + str(score), 40, (0, 0), (107, 20, 99), (128, 255, 255))
+                   setText("Crashed", 150, (display_width/2 - 240, 35), (0, 0, 0))
                    setText(None, 40, (0, 0), (255, 255, 255))
+                   play_window.blit(explosion, (basket_x + 20, basket_y - 20))
+                   pygame.display.update()
+
                    time.sleep(3)
 
                    for k in range(0, display_width+1, 5):
@@ -354,9 +361,26 @@ def game_play():
                    play_clicked = False
 
                # Makes the egg disappear !
+
                y = display_height
 
-               score+=1
+               #Incrementing the score appropriately.
+
+               if random_images == egg_images[6]:
+
+                  score += 1
+
+               elif random_images == egg_images[0] or random_images == egg_images[1] or random_images == egg_images[3]:
+
+                  score += 3
+
+               elif random_images == egg_images[4] or random_images == egg_images[5] or random_images == egg_images[8]:
+
+                    score += 5
+
+               elif random_images == egg_images[2]:
+
+                   score += 10
 
         # Checking whether the egg image had crossed the floor.
 
@@ -410,12 +434,13 @@ def game_play():
 
             pygame.display.set_caption("Game Over Buddy!")
 
+            game_over_clock = pygame.time.Clock()
+
             game_over_window.fill((188, 7, 116))
 
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
-
                     pygame.quit()
                     sys.exit()
 
@@ -428,7 +453,6 @@ def game_play():
                     setText("Back to Main Menu", 50, (display_width / 2 - 190, 430), (255, 0, 0))
 
                     if event.type == pygame.MOUSEBUTTONDOWN:
-
                         game_over = False
                         game_play()
 
@@ -438,22 +462,21 @@ def game_play():
 
                     setText("Back to Main Menu", 50, (display_width / 2 - 190, 430), (255, 255, 255))
 
-                if display_width / 2 + 70 > mouse[0] > display_width / 2 - 110 and 645 > mouse[1] > 540:
+                if display_width / 2 + 70 > mouse[0] > display_width / 2 - 110 and 635 > mouse[1] > 540:
 
-                     pygame.draw.rect(game_over_window, (255, 255, 0), (display_width / 2 - 110, 540, 170, 105))
+                    pygame.draw.rect(game_over_window, (255, 255, 0), (display_width / 2 - 110, 540, 180, 95))
 
-                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
+                    setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
 
-                     if event.type == pygame.MOUSEBUTTONDOWN:
-
-                         credit_clicked = True
-                         game_over = False
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        credit_clicked = True
+                        game_over = False
 
                 else:
 
-                     pygame.draw.rect(game_over_window, (255, 255, 255), (display_width / 2 - 110, 540, 170, 105))
+                    pygame.draw.rect(game_over_window, (255, 255, 255), (display_width / 2 - 110, 540, 180, 95))
 
-                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
+                    setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
 
             if track == 0:
 
@@ -491,15 +514,10 @@ def game_play():
 
                 track = 1
 
-            pygame.draw.rect(game_over_window, (244, 122, 11), (display_width / 2 - 200, 420, 420, 90))
+                pygame.display.update()
 
-            setText("Back to Main Menu", 50, (display_width / 2 - 190, 430), (255, 255, 255))
+                game_over_clock.tick(60)
 
-            pygame.draw.rect(game_over_window, (255, 255, 255), (display_width / 2 - 110, 540, 170, 105))
-
-            setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
-
-            pygame.display.update()
 
 if __name__ == '__main__':
     game_play()
