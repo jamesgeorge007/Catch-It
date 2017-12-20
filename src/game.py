@@ -1,6 +1,6 @@
-  # ----------- #
-  # <-- Credits --> #
-  # Developed by James George#
+# ----------- #
+# <-- Credits --> #
+# Developed by James George#
 
 
 # importing various modules required especially pygame.
@@ -13,18 +13,15 @@ import random
 
 pygame.init()
 
-
 # Initializing the width and height of the window to be 680 and 1250 pixels respectively.
 
 display_height = 680
 display_width = 1250
 
-
 # Setting the title and dimensions of the window
 
 pygame.display.set_caption('Catch It!')
 gameDisplay = pygame.display.set_mode((display_width, display_height))
-
 
 # Defining the clock to set the FPS rates
 clock = pygame.time.Clock()
@@ -38,21 +35,40 @@ clock = pygame.time.Clock()
 # 4. The background color which defaults to None if nothing are supplied.
 # 6. The font type / font-family as string enclosed within double quotations which defaults to Times New Roman.
 
-def setText(text, font_size, position, foreground_color, background_color = None, font_family="Times New Roman"):
-
+def setText(text, font_size, position, foreground_color, background_color=None, font_family="Times New Roman"):
     # Setting the font and related font features as per the parameters supplied.
 
-    font=pygame.font.SysFont(font_family, font_size)
-    text_to_display=font.render(text, 1, foreground_color, background_color)
+    font = pygame.font.SysFont(font_family, font_size)
+    text_to_display = font.render(text, 1, foreground_color, background_color)
     gameDisplay.blit(text_to_display, position)
     pygame.display.update()
+
+# Defining functions for file operations.
+
+
+def file_open_write(high_score):
+
+    f = open('../res/File/high_score.txt', 'w')
+    f.write(high_score)
+    return f
+
+
+def file_open_read():
+
+    f = open('../res/File/high_score.txt', 'r')
+    best_score = f.read()
+    return f, best_score
+
+
+def file_close(file):
+
+    file.close()
 
 
 # Game Play starts here!!!
 
 
 def game_play():
-
     # Images section
 
     # Relatively small sized images to be placed in the main menu
@@ -61,7 +77,9 @@ def game_play():
 
     basket_image = pygame.image.load('../res/images/small_basket.jpg')
 
-    egg_images = ['../res/images/1.jpg', '../res/images/2.jpg', '../res/images/3.jpg', '../res/images/4.jpg', '../res/images/5.jpg', '../res/images/6.jpg', '../res/images/7.gif', '../res/images/8.jpg', '../res/images/9.jpg', '../res/images/bomb.png']
+    egg_images = ['../res/images/1.jpg', '../res/images/2.jpg', '../res/images/3.jpg', '../res/images/4.jpg',
+                  '../res/images/5.jpg', '../res/images/6.jpg', '../res/images/7.gif', '../res/images/8.jpg',
+                  '../res/images/9.jpg', '../res/images/bomb.png']
 
     bomb_image = pygame.image.load(egg_images[9])
 
@@ -73,11 +91,11 @@ def game_play():
 
     # Initializing the speed variable which denotes the speed with which the images move.
 
-    image_speed=3
+    image_speed = 3
 
     # Intialiaing the score variable.
 
-    score=0
+    score = 0
 
     # Pixels being moved by the basket under keystrokes (10 px)
 
@@ -113,27 +131,25 @@ def game_play():
     gameDisplay.fill((0, 255, 255))
 
     # The Title moving up and positioning itself in the required co-ordinates.
-    for i in range(display_height+100, 14, -10):
-
-        setText("Catch It!!", 140, (display_width / 2 - 340, i), (125, 20, 220), (0, 255, 255), "Algerian")
+    for i in range(display_height + 100, 14, -10):
+        setText("Catch It!!", 140, (display_width / 2 - 340, i), (225, 10, 20), (0, 255, 255), "Algerian")
         pygame.time.wait(5)
 
     # Underlines
-    pygame.draw.line(gameDisplay, (125, 20, 220), (display_width / 2 - 340, 165), (display_width/2+330, 165))
-    pygame.draw.line(gameDisplay, (25, 120, 220), (display_width / 2 - 340, 168), (display_width/2+330, 168))
-    pygame.draw.line(gameDisplay, (220, 20, 125), (display_width / 2 - 340, 170), (display_width/2+330, 170))
+    pygame.draw.line(gameDisplay, (125, 20, 220), (display_width / 2 - 340, 165), (display_width / 2 + 330, 165))
+    pygame.draw.line(gameDisplay, (25, 120, 220), (display_width / 2 - 340, 168), (display_width / 2 + 330, 168))
+    pygame.draw.line(gameDisplay, (220, 20, 125), (display_width / 2 - 340, 170), (display_width / 2 + 330, 170))
 
     pygame.time.wait(1000)
 
-    gameDisplay.blit(bomb_image, (display_width/2+340, 25))
+    gameDisplay.blit(bomb_image, (display_width / 2 + 340, 25))
 
-    start = display_height+40
+    start = display_height + 40
     end = 299
     value = 0
 
     # Setting the basket image to move from start to end.
     '''while start>= end:
-
         gameDisplay.blit(basket_image, (display_width/2-550, start))
         start-= value
         pygame.time.wait(1000)
@@ -178,98 +194,140 @@ def game_play():
 
     while not user_clicked:
 
+        # (Event Loop) Keyboard and Mouse events (Checking whether the user had clicked any button)
 
-          # (Event Loop) Keyboard and Mouse events (Checking whether the user had clicked any button)
+        for event in pygame.event.get():
 
-          for event in pygame.event.get():
+            # Retrieving the mouse co-ordinates (Returns a list with 2 elements i,e X and Y co-ordinates)
 
-              # Retrieving the mouse co-ordinates (Returns a list with 2 elements i,e X and Y co-ordinates)
+            mouse_cord = pygame.mouse.get_pos()
 
-              mouse_cord = pygame.mouse.get_pos()
+            # Checking whether the close button was tapped and if so terminate the program!
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
-              # Checking whether the close button was tapped and if so terminate the program!
-              if event.type == pygame.QUIT:
+            # Checking whether the mouse is within the boundaries of the respective buttons in order (Hovered / Not)
+            if display_width / 2 - 100 + 230 > mouse_cord[0] > display_width / 2 - 100 and 360 > mouse_cord[1] > 260:
 
-                  pygame.quit()
-                  sys.exit()
+                pygame.draw.rect(gameDisplay, (150, 220, 200), (display_width / 2 - 100, 260, 230, 100))
+                setText("Play !", 80, (530, 260), (225, 10, 20), None, "forte")
 
-              # Checking whether the mouse is within the boundaries of the respective buttons in order (Hovered / Not)
-              if display_width/2-100+230>mouse_cord[0]>display_width/2-100 and 360>mouse_cord[1]>260:
+                # Checking whether the user has clicked the play button
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    user_clicked = True
+                    play_clicked = True
 
-                  pygame.draw.rect(gameDisplay, (150, 220, 200), (display_width / 2 - 100, 260, 230, 100))
-                  setText("Play !", 80, (530, 260), (225 ,10, 20), None , "forte")
+            else:
 
-                  # Checking whether the user has clicked the play button
-                  if event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.draw.rect(gameDisplay, (225, 10, 20), (display_width / 2 - 100, 260, 230, 100))
+                setText("Play !", 80, (530, 260), (255, 255, 255), None, "forte")
 
-                      user_clicked = True
-                      play_clicked = True
+            if display_width / 2 - 200 + 440 > mouse_cord[0] > display_width / 2 - 200 and 500 > mouse_cord[1] > 400:
 
-              else:
+                pygame.draw.rect(gameDisplay, (225, 100, 200), (display_width / 2 - 200, 400, 440, 100))
+                setText("Instructions", 80, (435, 400), (30, 220, 20), None, "forte")
 
-                  pygame.draw.rect(gameDisplay, (225, 10, 20), (display_width / 2 - 100, 260, 230, 100))
-                  setText("Play !", 80, (530, 260), (255, 255, 255), None, "forte")
+                # Checking whether the user has clicked the Instructions button
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    user_clicked = True
+                    instruction_clicked = True
+            else:
 
-              if display_width/2-200+440>mouse_cord[0]>display_width/2-200 and 500>mouse_cord[1]>400:
+                pygame.draw.rect(gameDisplay, (30, 220, 20), (display_width / 2 - 200, 400, 440, 100))
+                setText("Instructions", 80, (435, 400), (255, 255, 255), None, "forte")
 
-                  pygame.draw.rect(gameDisplay, (225, 100, 200), (display_width / 2 - 200, 400, 440, 100))
-                  setText("Instructions", 80, (435, 400), (30, 220, 20), None, "forte")
+            if display_width / 2 - 200 + 440 > mouse_cord[0] > display_width / 2 - 200 and 640 > mouse_cord[1] > 540:
 
-                  # Checking whether the user has clicked the Instructions button
-                  if event.type == pygame.MOUSEBUTTONDOWN:
-                      user_clicked = True
-                      instruction_clicked = True
-              else:
+                pygame.draw.rect(gameDisplay, (16, 140, 122), (display_width / 2 - 200, 540, 440, 100))
+                setText("Best Scores", 80, (450, 540), (75, 22, 205), None, "forte")
 
-                  pygame.draw.rect(gameDisplay, (30, 220, 20), (display_width / 2 - 200, 400, 440, 100))
-                  setText("Instructions", 80, (435, 400), (255, 255, 255), None, "forte")
+                # Checking whether the user has clicked the Best scores button
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    user_clicked = True
+                    best_scores_clicked = True
 
-              if display_width/2-200+440>mouse_cord[0]>display_width/2-200 and 640>mouse_cord[1]>540:
+            else:
 
-                  pygame.draw.rect(gameDisplay, (16, 140, 122), (display_width / 2 - 200, 540, 440, 100))
-                  setText("Best Scores", 80, (450, 540), (75, 22, 205), None, "forte")
+                pygame.draw.rect(gameDisplay, (30, 22, 240), (display_width / 2 - 200, 540, 440, 100))
+                setText("Best Scores", 80, (450, 540), (255, 255, 255), None, "forte")
 
-                  # Checking whether the user has clicked the Best scores button
-                  if event.type == pygame.MOUSEBUTTONDOWN:
-
-                      user_clicked = True
-                      best_scores_clicked = True
-
-              else:
-
-                  pygame.draw.rect(gameDisplay, (30, 22, 240), (display_width / 2 - 200, 540, 440, 100))
-                  setText("Best Scores", 80, (450, 540), (255, 255, 255), None, "forte")
-
-          clock.tick(60)
-
+        clock.tick(60)
 
     # Instructions window
     while instruction_clicked:
-
         pass
 
     # Shows  previous best high score stored in files in the same directory where the game lies
-    while best_scores_clicked:
-
-        score_window = pygame.display.set_mode((display_width, display_height)) 
+    if best_scores_clicked:
+        score_window = pygame.display.set_mode((display_width, display_height))
 
         pygame.display.set_caption('Best Score')
 
+        score_clock = pygame.time.Clock()
+
         score_window.fill((255, 255, 255))
 
-        setText("High Score", 120, (display_width / 2 - 280, 50), (128, 187, 128), None, "Algerian")
+        setText("High Score", 120, (display_width / 2 - 320, 50), (125, 20, 220), None, "Elephant")
 
-        time.sleep(5)
+        pygame.draw.line(score_window, (255, 0, 0), (display_width / 2 - 320, 180), (display_width / 2 + 340, 180), 5)
 
-        break
+        pygame.draw.line(score_window, (0, 255, 0), (display_width / 2 - 320, 185), (display_width / 2 + 340, 185), 5)
+
+        pygame.draw.line(score_window, (0, 0, 255), (display_width / 2 - 320, 190), (display_width / 2 + 340, 190), 5)
+
+        file_object, high_score = file_open_read()
+
+        setText(high_score, 100, (display_width / 2, display_height / 2), (0, 255, 0))
+
+        pygame.draw.rect(score_window, (212, 3, 108), (display_width / 2 - 130, display_height / 2 + 160, 300, 130))
+
+        setText("Go Back", 80, (display_width / 2 - 120, display_height / 2 + 180), (255, 255, 255))
+
+        file_close(file_object)
+
+        #pygame.display.update()
+
+    while best_scores_clicked:
+
+
+        for event in pygame.event.get():
+
+            mouse_position = pygame.mouse.get_pos()
+
+            if event.type == pygame.QUIT:
+
+                pygame.quit()
+                sys.exit()
+
+            if display_width / 2 + 170 > mouse_position[0] > display_width / 2 - 130 and display_height / 2 + 290 > mouse_position[1] > display_height / 2 + 160:
+
+                pygame.draw.rect(score_window, (212, 3, 108), (display_width / 2 - 130, display_height / 2 + 160, 300, 130))
+
+                setText("Go Back", 80, (display_width / 2 - 120, display_height / 2 + 180), (255, 255, 255))
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+
+                    best_scores_clicked = False
+                    game_play()
+
+            else:
+
+                pygame.draw.rect(score_window, (212, 108, 3), (display_width / 2 - 130, display_height / 2 + 160, 300, 130))
+
+                setText("Go Back", 80, (display_width / 2 - 120, display_height / 2 + 180), (255, 255, 255))
+
+        pygame.display.update()
+
+        score_clock.tick(30)
 
     # X and Y co-ordinates of the basket.
-    basket_x = display_width/2-200
+    basket_x = display_width / 2 - 200
 
-    basket_y = display_height-270
+    basket_y = display_height - 270
 
     # For changing the X co-ordinate of the basket when appropriate keys are pressed.
-    x_change=0
+    x_change = 0
 
     # Random positions for eggs
 
@@ -287,13 +345,13 @@ def game_play():
     while play_clicked:
 
         # New game window is created on clicking the play button with the same dimensions.
-        play_window=pygame.display.set_mode((1250,680))
+        play_window = pygame.display.set_mode((1250, 680))
 
         pygame.display.set_caption('Play')
 
-        play_window.fill((255,255,255))
+        play_window.fill((255, 255, 255))
 
-        play_clock=pygame.time.Clock()
+        play_clock = pygame.time.Clock()
 
         play_window.blit(random_eggs, (x, y))
 
@@ -307,7 +365,7 @@ def game_play():
 
         for event in pygame.event.get():
 
-            # Event Handlings
+            # Event handling
             if event.type == pygame.QUIT:
 
                 pygame.quit()
@@ -341,58 +399,57 @@ def game_play():
 
         # Checking egg and basket crossover.
 
-        if y+80 >= basket_y and y+80 <= basket_y+15:
+        if y + 80 >= basket_y and y + 80 <= basket_y + 15:
 
-            if x >= basket_x-40 and x + 100 <= basket_x +display_width/2-240:
+            if x >= basket_x - 40 and x + 100 <= basket_x + display_width / 2 - 240:
 
-               # Checks collision with bomb and minion image
+                # Checks collision with bomb and minion image
 
-               if random_images == egg_images[9] or random_images == egg_images[7]:
+                if random_images == egg_images[9] or random_images == egg_images[7]:
 
-                   score -= 5
-                   setText("Your Score:" + str(score), 40, (0, 0), (107, 20, 99), (128, 255, 255))
-                   setText("Crashed", 150, (display_width/2 - 240, 35), (0, 0, 0))
-                   setText(None, 40, (0, 0), (255, 255, 255))
-                   play_window.blit(explosion, (basket_x, basket_y - 80))
-                   pygame.display.update()
+                    score -= 5
+                    setText("Your Score:" + str(score), 40, (0, 0), (107, 20, 99), (128, 255, 255))
+                    setText("Crashed", 150, (display_width / 2 - 240, 35), (0, 0, 0))
+                    setText(None, 40, (0, 0), (255, 255, 255))
+                    play_window.blit(explosion, (basket_x, basket_y - 80))
+                    pygame.display.update()
 
-                   time.sleep(3)
+                    time.sleep(3)
 
-                   for k in range(0, display_width+1, 5):
-
-                        setText("Your Score:" + str(score), 40, (k, 0), (107, 20, 99), (128, 255, 255),)
+                    for k in range(0, display_width + 1, 5):
+                        setText("Your Score:" + str(score), 40, (k, 0), (107, 20, 99), (128, 255, 255), )
                         pygame.time.wait(20)
 
-                   time.sleep(2)
+                    time.sleep(2)
 
-                   game_over = True
-                   play_clicked = False
+                    game_over = True
+                    play_clicked = False
 
-               # Makes the egg disappear !
+                # Makes the egg disappear !
 
-               y = display_height
+                y = display_height
 
-               #Incrementing the score appropriately.
+                # Incrementing the score appropriately.
 
-               if random_images == egg_images[6]:
+                if random_images == egg_images[6]:
 
-                  score += 1
+                    score += 1
 
-               elif random_images == egg_images[0] or random_images == egg_images[1] or random_images == egg_images[3]:
+                elif random_images == egg_images[0] or random_images == egg_images[1] or random_images == egg_images[3]:
 
-                  score += 3
+                    score += 3
 
-               elif random_images == egg_images[4] or random_images == egg_images[5] or random_images == egg_images[8]:
+                elif random_images == egg_images[4] or random_images == egg_images[5] or random_images == egg_images[8]:
 
                     score += 5
 
-               elif random_images == egg_images[2]:
+                elif random_images == egg_images[2]:
 
-                   score += 10
+                    score += 10
 
         # Checking whether the egg image had crossed the floor.
 
-        if y>= display_height+200:
+        if y >= display_height + 200:
 
             # Random positions for eggs
 
@@ -401,40 +458,48 @@ def game_play():
 
             # Randomly loading Egg images
 
-            random_images = egg_images[random.randint(0,9)]
+            random_images = egg_images[random.randint(0, 9)]
 
             random_eggs = pygame.image.load(random_images)
 
             # Increasing the speed in which the basket moves both the directions.
 
             if unit != 15:
-
                 unit += 1
 
             # Increasing the speed in which the images moves down.
 
             if image_speed != 16:
-
                 image_speed += 1
-
 
         # Restricting the basket within the width of the Game window
 
-        if basket_x <= 0 :
+        if basket_x <= 0:
 
-                basket_x = 0
+            basket_x = 0
 
-        elif basket_x >= display_width-300 :
+        elif basket_x >= display_width - 300:
 
-                 basket_x = display_width-300
+            basket_x = display_width - 300
 
         pygame.display.update()
         play_clock.tick(60)
 
-        # Game Over window
-
         # To prevent GAME OVER being displayed infinitely.
         track = 0
+
+        # Checking whether the current score is greater than the best score.
+
+        file, current_best_score = file_open_read()
+
+        file_close(file)
+
+        if score > int(current_best_score):
+            file = file_open_write(str(score))
+            file_close(file)
+
+
+        # Game Over window
 
         while game_over:
 
@@ -487,7 +552,6 @@ def game_play():
                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
 
             if track == 0:
-
                 setText("G", 90, (180, 250), (255, 255, 255), None, "Elephant")
 
                 pygame.time.wait(400)
