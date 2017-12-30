@@ -564,12 +564,10 @@ def game_play():
         pygame.display.update()
         play_clock.tick(60)
 
-        # To prevent GAME OVER being displayed infinitely.
-        track = 0
 
-        # Game Over window
+    # Game Over window
 
-        while game_over:
+    if game_over:
 
             game_over_window = pygame.display.set_mode((display_width, display_height))
 
@@ -578,6 +576,40 @@ def game_play():
             game_over_clock = pygame.time.Clock()
 
             game_over_window.fill((188, 7, 116))
+
+            setText("G", 90, (180, 250), (255, 255, 255), None, "Elephant")
+
+            pygame.time.wait(400)
+
+            setText("A", 90, (270, 250), (255, 255, 255), None, "Elephant")
+
+            pygame.time.wait(400)
+
+            setText("M", 90, (360, 250), (255, 255, 255), None, "Elephant")
+
+            pygame.time.wait(400)
+
+            setText("E", 90, (460, 250), (255, 255, 255), None, "Elephant")
+
+            pygame.time.wait(400)
+
+            setText("O", 90, (630, 250), (5, 96, 196), None, "Elephant")
+
+            pygame.time.wait(400)
+
+            setText("V", 90, (720, 250), (5, 96, 196), None, "Elephant")
+
+            pygame.time.wait(400)
+
+            setText("E", 90, (810, 250), (5, 96, 196), None, "Elephant")
+
+            pygame.time.wait(400)
+
+            setText("R", 90, (900, 250), (5, 96, 196), None, "Elephant")
+
+            pygame.time.wait(400)
+
+    while game_over:
 
             for event in pygame.event.get():
 
@@ -605,7 +637,7 @@ def game_play():
 
                 if display_width / 2 + 70 > mouse[0] > display_width / 2 - 110 and 635 > mouse[1] > 540:
 
-                    pygame.draw.rect(game_over_window, (255, 255, 0), (display_width / 2 - 110, 540, 180, 95))
+                    pygame.draw.rect(game_over_window, (128, 255, 255), (display_width / 2 - 110, 540, 180, 95))
 
                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
 
@@ -619,44 +651,9 @@ def game_play():
 
                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
 
-            if track == 0:
-                setText("G", 90, (180, 250), (255, 255, 255), None, "Elephant")
+            pygame.display.update()
 
-                pygame.time.wait(400)
-
-                setText("A", 90, (270, 250), (255, 255, 255), None, "Elephant")
-
-                pygame.time.wait(400)
-
-                setText("M", 90, (360, 250), (255, 255, 255), None, "Elephant")
-
-                pygame.time.wait(400)
-
-                setText("E", 90, (460, 250), (255, 255, 255), None, "Elephant")
-
-                pygame.time.wait(400)
-
-                setText("O", 90, (630, 250), (5, 96, 196), None, "Elephant")
-
-                pygame.time.wait(400)
-
-                setText("V", 90, (720, 250), (5, 96, 196), None, "Elephant")
-
-                pygame.time.wait(400)
-
-                setText("E", 90, (810, 250), (5, 96, 196), None, "Elephant")
-
-                pygame.time.wait(400)
-
-                setText("R", 90, (900, 250), (5, 96, 196), None, "Elephant")
-
-                pygame.time.wait(400)
-
-                track = 1
-
-                pygame.display.update()
-
-                game_over_clock.tick(60)
+            game_over_clock.tick(60)
 
     if credit_clicked:
 
@@ -668,13 +665,13 @@ def game_play():
 
         credits_window.fill((255, 255, 255))
 
-        setText("CREDITS", 100, (display_width / 2 - 180, 40), (127, 128, 127), None, "Algerian")
+        setText("CREDITS", 100, (display_width / 2 - 180, 20), (127, 128, 127), None, "Algerian")
 
-        pygame.draw.line(credits_window, (0, 0, 255), (display_width / 2 - 180, 140), (display_width / 2 + 180, 140), 3)
+        pygame.draw.line(credits_window, (0, 0, 255), (display_width / 2 - 180, 120), (display_width / 2 + 180, 120), 3)
         
-        pygame.draw.line(credits_window, (0, 255, 0), (display_width / 2 - 180, 145), (display_width / 2 + 180, 145), 3)
+        pygame.draw.line(credits_window, (0, 255, 0), (display_width / 2 - 180, 125), (display_width / 2 + 180, 125), 3)
 
-        pygame.draw.line(credits_window, (255, 0, 0), (display_width / 2 - 180, 150), (display_width / 2 + 180, 150), 3)
+        pygame.draw.line(credits_window, (255, 0, 0), (display_width / 2 - 180, 130), (display_width / 2 + 180, 130), 3)
         
         setText("Developer:", 80, (display_width / 2 - 180, display_height / 2 - 200), (65, 64, 65), None, "Forte")
 
@@ -684,7 +681,7 @@ def game_play():
         
         pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 210, display_height / 2 + 200, 470, 100))
 
-        setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 250), (0, 160, 0), None, "Forte")
+        setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 210), (0, 160, 0), None, "Forte")
         
     while credit_clicked:
 
@@ -699,9 +696,9 @@ def game_play():
 
             if display_width / 2 + 260 > mouse_pos[0] > display_width / 2 - 210 and display_height / 2 + 300 > mouse_pos[1] > display_height / 2 + 200:
 
-                pygame.draw.rect(credits_window, (0, 0, 160), (display_width / 2 - 210, display_height / 2 + 200, 470, 150))
+                pygame.draw.rect(credits_window, (0, 0, 160), (display_width / 2 - 210, display_height / 2 + 200, 470, 100))
 
-                setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 250), (0, 160, 0), None,"Forte")
+                setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 210), (0, 160, 0), None,"Forte")
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
 
@@ -710,9 +707,9 @@ def game_play():
 
             else:
 
-                pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 210, display_height / 2 + 200, 470, 150))
+                pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 210, display_height / 2 + 200, 470, 100))
 
-                setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 250), (0, 160, 0), None, "Forte")
+                setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 210), (0, 160, 0), None, "Forte")
 
         pygame.display.update()
 
