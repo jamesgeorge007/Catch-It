@@ -128,11 +128,11 @@ def game_play():
     # Main Menu with 3 Buttons
 
     # Setting white background to the game window
-    gameDisplay.fill((0, 255, 255))
+    gameDisplay.fill((255, 255, 255))
 
     # The Title moving up and positioning itself in the required co-ordinates.
     for i in range(display_height + 100, 14, -10):
-        setText("Catch It!!", 140, (display_width / 2 - 340, i), (225, 10, 20), (0, 255, 255), "Algerian")
+        setText("Catch It!!", 140, (display_width / 2 - 340, i), (225, 10, 20), (255, 255, 255), "Algerian")
         pygame.time.wait(5)
 
     # Underlines
@@ -255,14 +255,84 @@ def game_play():
         clock.tick(60)
 
     # Instructions window
+    if instruction_clicked:
+        
+        instruction_window = pygame.display.set_mode((display_width, display_height))
+
+        pygame.display.set_caption('Instructions')
+
+        instruction_clock = pygame.time.Clock()
+
+        instruction_window.fill((69, 250, 245))
+
+        setText("Instructions", 120, (display_width / 2 - 360, 50), (125, 20, 220), None, "Elephant")
+
+        pygame.draw.line(instruction_window, (255, 0, 0), (display_width / 2 - 360, 180), (display_width / 2 + 400, 180), 5)
+
+        pygame.draw.line(instruction_window, (0, 255, 0), (display_width / 2 - 360, 185), (display_width / 2 + 400, 185), 5)
+
+        pygame.draw.line(instruction_window, (0, 0, 255), (display_width / 2 - 360, 190), (display_width / 2 + 400, 190), 5)
+
+        setText("1. Use left and right arrow keys to move the basket appropriately.", 45, (40, 220), (255, 0, 0))
+
+        setText("2. Use down arrow key to stop the basket at that point.", 45, (40, 290), (0, 185, 0))
+
+        setText("3. Collect as many eggs as you can with the basket.", 45, (40,360), (0, 0, 255))
+
+        setText("4. Avoid crashing with minions and bombs!", 45, (40, 430), (255, 0, 0))
+        
+        setText("5. Points Awarded: 1, 3, 5 and 10 depending up on the kind of egg.", 45, (40, 500), (255, 0, 255))
+        
+        pygame.draw.rect(instruction_window, (0, 128, 255), (display_width / 2 - 180, 560, 160, 80))
+
+        setText("Back", 60, (display_width / 2 - 160, 570), (255, 255, 255))
+
     while instruction_clicked:
-        pass
+
+        for event in pygame.event.get():
+
+            mouse = pygame.mouse.get_pos()
+
+            if event.type == pygame.QUIT:
+
+                pygame.quit()
+                sys.exit()
+
+            if display_width / 2 - 20 > mouse[0] > display_width / 2 - 180 and 640 > mouse[1] > 560:
+
+                pygame.draw.rect(instruction_window, (255, 255, 255), (display_width / 2 - 180, 560, 160, 80))
+
+                setText("Back", 60, (display_width / 2 - 160, 570), (0, 128, 255))
+
+                setText("Best of Luck!!", 60, (display_width / 2, 560), (185, 0, 0), None, "Forte")
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+
+                    instruction_clicked = False
+                    game_play()
+
+
+            else:
+                
+                pygame.draw.rect(instruction_window, (0, 128, 255), (display_width / 2 - 180, 560, 160, 80))
+
+                setText("Back", 60, (display_width / 2 - 160, 570), (255, 255, 255))
+
+                instruction_window.fill((69, 250, 245), (display_width / 2, 570, 500, 70))
+
+        pygame.display.update()
+
+        instruction_clock.tick(30)
+
+        
+
+
 
     # Shows  previous best high score stored in files in the same directory where the game lies
     if best_scores_clicked:
         score_window = pygame.display.set_mode((display_width, display_height))
 
-        pygame.display.set_caption('Best Score')
+        pygame.display.set_caption('High Score')
 
         score_clock = pygame.time.Clock()
 
@@ -285,8 +355,6 @@ def game_play():
         setText("Go Back", 80, (display_width / 2 - 120, display_height / 2 + 180), (255, 255, 255))
 
         file_close(file_object)
-
-        #pygame.display.update()
 
     while best_scores_clicked:
 
@@ -409,9 +477,20 @@ def game_play():
 
                     score -= 5
                     setText("Your Score:" + str(score), 40, (0, 0), (107, 20, 99), (128, 255, 255))
+
+                     # Checking whether the current score is greater than the best score.
+                     
+                    file, current_best_score = file_open_read()
+
+                    file_close(file)
+
+                    if score > int(current_best_score):
+                        file = file_open_write(str(score))
+                        file_close(file)
+
                     setText("Crashed", 150, (display_width / 2 - 240, 35), (0, 0, 0))
                     setText(None, 40, (0, 0), (255, 255, 255))
-                    play_window.blit(explosion, (basket_x, basket_y - 80))
+                    play_window.blit(explosion, (basket_x, basket_y - 50))
                     pygame.display.update()
 
                     time.sleep(3)
@@ -487,17 +566,6 @@ def game_play():
 
         # To prevent GAME OVER being displayed infinitely.
         track = 0
-
-        # Checking whether the current score is greater than the best score.
-
-        file, current_best_score = file_open_read()
-
-        file_close(file)
-
-        if score > int(current_best_score):
-            file = file_open_write(str(score))
-            file_close(file)
-
 
         # Game Over window
 
@@ -589,6 +657,66 @@ def game_play():
                 pygame.display.update()
 
                 game_over_clock.tick(60)
+
+    if credit_clicked:
+
+        credits_window = pygame.display.set_mode((display_width, display_height))
+
+        pygame.display.set_caption("CREDITS")
+
+        credits_clock = pygame.time.Clock()
+
+        credits_window.fill((255, 255, 255))
+
+        setText("CREDITS", 100, (display_width / 2 - 180, 40), (127, 128, 127), None, "Algerian")
+
+        pygame.draw.line(credits_window, (0, 0, 255), (display_width / 2 - 180, 140), (display_width / 2 + 180, 140), 3)
+        
+        pygame.draw.line(credits_window, (0, 255, 0), (display_width / 2 - 180, 145), (display_width / 2 + 180, 145), 3)
+
+        pygame.draw.line(credits_window, (255, 0, 0), (display_width / 2 - 180, 150), (display_width / 2 + 180, 150), 3)
+        
+        setText("Developer:", 80, (display_width / 2 - 180, display_height / 2 - 200), (65, 64, 65), None, "Forte")
+
+        setText("James", 100, (display_width / 2 - 200, display_height / 2 - 120), (165, 64, 65), None, "Elephant")
+
+        setText("George", 100, (display_width / 2 - 200, display_height / 2 - 20), (65, 64, 165), None, "Elephant")
+        
+        pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 210, display_height / 2 + 200, 470, 100))
+
+        setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 250), (0, 160, 0), None, "Forte")
+        
+    while credit_clicked:
+
+        for event in pygame.event.get():
+
+            mouse_pos = pygame.mouse.get_pos()
+
+            if event.type == pygame.QUIT:
+
+                pygame.quit()
+                sys.exit()
+
+            if display_width / 2 + 260 > mouse_pos[0] > display_width / 2 - 210 and display_height / 2 + 300 > mouse_pos[1] > display_height / 2 + 200:
+
+                pygame.draw.rect(credits_window, (0, 0, 160), (display_width / 2 - 210, display_height / 2 + 200, 470, 150))
+
+                setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 250), (0, 160, 0), None,"Forte")
+                
+                if event.type == pygame.MOUSEBUTTONDOWN:
+
+                    credit_clicked = False
+                    game_play()
+
+            else:
+
+                pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 210, display_height / 2 + 200, 470, 150))
+
+                setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 250), (0, 160, 0), None, "Forte")
+
+        pygame.display.update()
+
+        credits_clock.tick(30)        
 
 
 if __name__ == '__main__':
