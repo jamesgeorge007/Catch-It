@@ -1,6 +1,6 @@
 # ----------- #
 # <-- Credits --> #
-# Developed by James George#
+# Developed by James George #
 
 
 # importing various modules required especially pygame.
@@ -490,7 +490,7 @@ def game_play():
 
                     setText("Crashed", 150, (display_width / 2 - 240, 35), (0, 0, 0))
                     setText(None, 40, (0, 0), (255, 255, 255))
-                    play_window.blit(explosion, (basket_x, basket_y - 50))
+                    play_window.blit(explosion, (basket_x, basket_y - 80))
                     pygame.display.update()
 
                     time.sleep(3)
@@ -609,6 +609,14 @@ def game_play():
 
             pygame.time.wait(400)
 
+            pygame.draw.rect(game_over_window, (244, 122, 11), (display_width / 2 - 200, 420, 420, 90))
+
+            setText("Back to Main Menu", 50, (display_width / 2 - 190, 430), (255, 255, 255))
+
+            pygame.draw.rect(game_over_window, (255, 255, 128), (display_width / 2 - 110, 540, 180, 95))
+
+            setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
+
     while game_over:
 
             for event in pygame.event.get():
@@ -655,6 +663,13 @@ def game_play():
 
             game_over_clock.tick(60)
 
+    # Variables required for foreground colors.
+    i=65
+
+    j=64
+
+    k=65        
+
     if credit_clicked:
 
         credits_window = pygame.display.set_mode((display_width, display_height))
@@ -663,27 +678,46 @@ def game_play():
 
         credits_clock = pygame.time.Clock()
 
-        credits_window.fill((255, 255, 255))
+        credits_window.fill((0, 255, 255))
 
-        setText("CREDITS", 100, (display_width / 2 - 180, 20), (127, 128, 127), None, "Algerian")
+        setText("CREDITS", 150, (display_width / 2 - 280, 20), (127, 128, 127), None, "Algerian")
 
-        pygame.draw.line(credits_window, (0, 0, 255), (display_width / 2 - 180, 120), (display_width / 2 + 180, 120), 3)
+        pygame.draw.line(credits_window, (0, 0, 255), (display_width / 2 - 280, 160), (display_width / 2 + 280, 160), 3)
         
-        pygame.draw.line(credits_window, (0, 255, 0), (display_width / 2 - 180, 125), (display_width / 2 + 180, 125), 3)
+        pygame.draw.line(credits_window, (0, 255, 0), (display_width / 2 - 280, 165), (display_width / 2 + 280, 165), 3)
 
-        pygame.draw.line(credits_window, (255, 0, 0), (display_width / 2 - 180, 130), (display_width / 2 + 180, 130), 3)
+        pygame.draw.line(credits_window, (255, 0, 0), (display_width / 2 - 280, 170), (display_width / 2 + 280, 170), 3)
         
-        setText("Developer:", 80, (display_width / 2 - 180, display_height / 2 - 200), (65, 64, 65), None, "Forte")
-
-        setText("James", 100, (display_width / 2 - 200, display_height / 2 - 120), (165, 64, 65), None, "Elephant")
-
-        setText("George", 100, (display_width / 2 - 200, display_height / 2 - 20), (65, 64, 165), None, "Elephant")
+        pygame.time.wait(1000)
+       
+        setText("Developer:", 120, (display_width / 2 - 240, display_height / 2 - 150), (170, 0, 0), None, "Forte")
         
-        pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 210, display_height / 2 + 200, 470, 100))
+        setText("James", 100, (display_width / 2 - 170, display_height / 2 - 20), (i, j, k), None, "Elephant")
 
-        setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 210), (0, 160, 0), None, "Forte")
+        pygame.time.wait(1500)    
+
+        setText("George", 100, (display_height / 2 + 90, display_height / 2 + 80), (k, j, i), None, "Elephant")
+
+        pygame.time.wait(1500)
+        
+        pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 230, display_height / 2 + 200, 470, 120))
+
+        setText("Play Again!", 80, (display_width / 2 - 205, display_height / 2 + 210), (0, 160, 0), None, "Forte")
         
     while credit_clicked:
+        
+        if i >= 255:
+            i = 64
+
+        if j >=255:
+            j = 65
+
+        if k >=255:
+            k = 64        
+        
+        setText("James", 100, (display_width / 2 - 170, display_height / 2 - 20), (i, j, k), None, "Elephant")    
+
+        setText("George", 100, (display_height / 2 + 90, display_height / 2 + 80), (k, j, i), None, "Elephant")
 
         for event in pygame.event.get():
 
@@ -694,11 +728,11 @@ def game_play():
                 pygame.quit()
                 sys.exit()
 
-            if display_width / 2 + 260 > mouse_pos[0] > display_width / 2 - 210 and display_height / 2 + 300 > mouse_pos[1] > display_height / 2 + 200:
+            if display_width / 2 + 260 > mouse_pos[0] > display_width / 2 - 230 and display_height / 2 + 300 > mouse_pos[1] > display_height / 2 + 200:
 
-                pygame.draw.rect(credits_window, (0, 0, 160), (display_width / 2 - 210, display_height / 2 + 200, 470, 100))
+                pygame.draw.rect(credits_window, (0, 0, 160), (display_width / 2 - 230, display_height / 2 + 200, 470, 120))
 
-                setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 210), (0, 160, 0), None,"Forte")
+                setText("Play Again!", 80, (display_width / 2 - 205, display_height / 2 + 210), (0, 160, 0), None,"Forte")
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
 
@@ -707,10 +741,16 @@ def game_play():
 
             else:
 
-                pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 210, display_height / 2 + 200, 470, 100))
+                pygame.draw.rect(credits_window, (160, 0, 0), (display_width / 2 - 230, display_height / 2 + 200, 470, 120))
 
-                setText("Play Again!", 80, (display_width / 2 - 175, display_height / 2 + 210), (0, 160, 0), None, "Forte")
+                setText("Play Again!", 80, (display_width / 2 - 205, display_height / 2 + 210), (0, 160, 0), None, "Forte")
 
+        i += random.randint(1, 10)
+
+        j += random.randint(1, 10)
+
+        k += random.randint(1, 10)
+        
         pygame.display.update()
 
         credits_clock.tick(30)        
