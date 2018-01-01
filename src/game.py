@@ -496,7 +496,7 @@ def game_play():
                     time.sleep(3)
 
                     for k in range(0, display_width + 1, 5):
-                        setText("Your Score:" + str(score), 40, (k, 0), (107, 20, 99), (128, 255, 255), )
+                        setText("Your Score:" + str(score), 40, (k, 0), (107, 20, 99), (128, 255, 255))
                         pygame.time.wait(20)
 
                     time.sleep(2)
@@ -645,7 +645,7 @@ def game_play():
 
                 if display_width / 2 + 70 > mouse[0] > display_width / 2 - 110 and 635 > mouse[1] > 540:
 
-                    pygame.draw.rect(game_over_window, (128, 255, 255), (display_width / 2 - 110, 540, 180, 95))
+                    pygame.draw.rect(game_over_window, (235, 125, 255), (display_width / 2 - 110, 540, 180, 95))
 
                     setText("Credits", 60, (display_width / 2 - 110, 550), (0, 128, 127), None, "Forte")
 
@@ -680,7 +680,7 @@ def game_play():
 
         credits_window.fill((0, 255, 255))
 
-        setText("CREDITS", 150, (display_width / 2 - 280, 20), (127, 128, 127), None, "Algerian")
+        setText("CREDITS", 150, (display_width / 2 - 280, 20), (127, 178, 68), None, "Algerian")
 
         pygame.draw.line(credits_window, (0, 0, 255), (display_width / 2 - 280, 160), (display_width / 2 + 280, 160), 3)
         
@@ -690,7 +690,7 @@ def game_play():
         
         pygame.time.wait(1000)
        
-        setText("Developer:", 120, (display_width / 2 - 240, display_height / 2 - 150), (170, 0, 0), None, "Forte")
+        setText("Developer:", 120, (display_width / 2 - 240, display_height / 2 - 150), (0, 170, 0), None, "Forte")
         
         setText("James", 100, (display_width / 2 - 170, display_height / 2 - 20), (i, j, k), None, "Elephant")
 
