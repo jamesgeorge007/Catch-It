@@ -130,6 +130,10 @@ def game_play():
     # Setting white background to the game window
     gameDisplay.fill((255, 255, 255))
 
+    pygame.mixer.music.load('../res/Songs/game_music.wav')
+
+    pygame.mixer.music.play(-1)
+
     # The Title moving up and positioning itself in the required co-ordinates.
     for i in range(display_height + 100, 14, -10):
         setText("Catch It!!", 140, (display_width / 2 - 340, i), (225, 10, 20), (255, 255, 255), "Algerian")
