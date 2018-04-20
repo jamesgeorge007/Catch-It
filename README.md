@@ -13,7 +13,7 @@ There is also a provision to check out the highest score which is implemented us
   <li> Ensure that you have Python installed on your system and the path is properly configured. </li>
   <li> Install the Git client. </li>
   <li> 
-    Clone this repository to your local machine. i,e git clone https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python </li>
+    Clone this repository to your local machine. i,e <code> git clone https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python </code> </li>
   <li> Install pygame via the pip package manager => Open command prompt and type in py -m pip install pygame. </li>
   <li> You can find the main source file within the src directory. Run the code and you have the game </li>
   <li> Fork this repository and suggest me your ideas in the form of a pull request and also don't forget to star my repositories. </li>
