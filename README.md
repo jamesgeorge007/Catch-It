@@ -8,36 +8,24 @@ There is also a provision to check out the highest score which is implemented us
 
 ## Instructions 
 
- * Ensure that you have Python (I prefer version 3.5+) installed on your system and the path is properly configured. </li>
- * Install the Git client. </li>
+ * Ensure that you have Python (I prefer version 3.5+) installed on your system and the path is properly configured. 
+ * Install the Git client. 
  * Clone this repository to your local machine. ` ` ` git clone https://github.com/jamesgeorge007/Catch-It ` ` `
- * Install pygame via the pip package manager => Open command prompt and type in py -m pip install pygame. 
+ * Install pygame via the pip package manager. ` ` ` pip install pygame ` ` ` 
  * You can find the main source file within the src directory. Run the code and you have the game 
- * Fork this repository and suggest me your ideas in the form of a pull request and also don't forget to star my repositories. 
+ * Contributions are always welcomed. 
   
   ## Screenshots 
   
-  ### Main Menu 
-  
   ![Main Menu](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/menu.JPG)
   
-  ### Instructions 
-  
-  ![Instructions](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/instructions.JPG)
-  
-  ### High Score 
+  ![Instructions](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/instructions.JPG) 
   
   ![High Score](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/high_score.JPG)
   
-  ### Crashed 
+  ![Crashed](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/crashed.JPG) 
   
-  ![Crashed](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/crashed.JPG)
-  
-  ### Game Over 
-  
-  ![Game Over](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/game_over.JPG)
-  
-  ### Credits  
+  ![Game Over](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/game_over.JPG) 
   
   ![Credits](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/credits.JPG)
 
