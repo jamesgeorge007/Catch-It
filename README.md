@@ -1,4 +1,4 @@
-# Catch-It
+<h1 align="center"> Catch-It </h1>
 
 ## Basic Info 
 
