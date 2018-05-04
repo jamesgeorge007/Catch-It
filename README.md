@@ -1,3 +1,5 @@
+[![GitHub issues](https://img.shields.io/github/issues/jamesgeorge007/Catch-It.svg)](https://github.com/jamesgeorge007/Catch-It/issues)  [![GitHub forks](https://img.shields.io/github/forks/jamesgeorge007/Catch-It.svg)](https://github.com/jamesgeorge007/Catch-It/network) [![GitHub stars](https://img.shields.io/github/stars/jamesgeorge007/Catch-It.svg)](https://github.com/jamesgeorge007/Catch-It/stargazers)  [![GitHub license](https://img.shields.io/github/license/jamesgeorge007/Catch-It.svg)](https://github.com/jamesgeorge007/Catch-It/blob/master/LICENSE)
+
 <h1 align="center"> Catch-It </h1>
 
 ## Basic Info 
