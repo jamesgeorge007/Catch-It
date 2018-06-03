@@ -73,21 +73,21 @@ def game_play():
 
     # Relatively small sized images to be placed in the main menu
 
-    minion_image = pygame.image.load('../res/images/small_minion.jpg')
+    minion_image = pygame.image.load('../res/Images/small_minion.jpg')
 
-    basket_image = pygame.image.load('../res/images/small_basket.jpg')
+    basket_image = pygame.image.load('../res/Images/small_basket.jpg')
 
-    egg_images = ['../res/images/1.jpg', '../res/images/2.jpg', '../res/images/3.jpg', '../res/images/4.jpg',
-                  '../res/images/5.jpg', '../res/images/6.jpg', '../res/images/7.gif', '../res/images/8.jpg',
-                  '../res/images/9.jpg', '../res/images/bomb.png']
+    egg_images = ['../res/Images/1.jpg', '../res/Images/2.jpg', '../res/Images/3.jpg', '../res/Images/4.jpg',
+                  '../res/Images/5.jpg', '../res/Images/6.jpg', '../res/Images/7.gif', '../res/Images/8.jpg',
+                  '../res/Images/9.jpg', '../res/Images/bomb.png']
 
     bomb_image = pygame.image.load(egg_images[9])
 
-    basket = pygame.image.load('../res/images/basket.jpg')
+    basket = pygame.image.load('../res/Images/basket.JPG')
 
     minion = pygame.image.load(egg_images[7])
 
-    explosion = pygame.image.load('../res/images/explosion.gif')
+    explosion = pygame.image.load('../res/Images/explosion.gif')
 
     # Initializing the speed variable which denotes the speed with which the images move.
 
