@@ -37,6 +37,11 @@ There is also a provision to check out the highest score which is implemented us
   
   ![Credits](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/credits.JPG)
 
+## Stargazers over time
+
+[![Stargazers over time](https://starcharts.herokuapp.com/jamesgeorge007/Catch-It.svg)](https://starcharts.herokuapp.com/jamesgeorge007/Catch-It)
+
+
 About pygame
 ============
 
