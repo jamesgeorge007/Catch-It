@@ -22,6 +22,9 @@ There is also a provision to check out the highest score which is implemented us
 ## License
 
 > **The MIT License**
+
+![](https://github.com/fortunate-man/catch-it/raw/master/catch-it.gif)
+
   
   ## Screenshots 
   
