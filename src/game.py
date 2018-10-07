@@ -30,6 +30,13 @@ import pygame
 import sys
 import time
 import random
+import os
+
+
+# Initialized resource path for cross platform compatibility
+BASE_DIR = os.path.dirname(__file__)
+RESOURCE_PATH = os.path.join(BASE_DIR, '..', 'res')
+IMAGE_PATH = os.path.join(RESOURCE_PATH, 'Images')
 
 # Initializing pygame.
 
@@ -70,14 +77,14 @@ def setText(text, font_size, position, foreground_color, background_color=None, 
 
 def file_open_write(high_score):
 
-    f = open('../res/File/high_score.txt', 'w')
+    f = open(os.path.join(RESOURCE_PATH, 'File', 'high_score.txt'), 'w')
     f.write(high_score)
     return f
 
 
 def file_open_read():
 
-    f = open('../res/File/high_score.txt', 'r')
+    f = open(os.path.join(RESOURCE_PATH, 'File', 'high_score.txt'), 'r')
     best_score = f.read()
     return f, best_score
 
@@ -94,22 +101,20 @@ def game_play():
     # Images section
 
     # Relatively small sized images to be placed in the main menu
+    minion_image = pygame.image.load(os.path.join(IMAGE_PATH, 'small_minion.jpg'))
 
-    minion_image = pygame.image.load('../res/Images/small_minion.jpg')
+    basket_image = pygame.image.load(os.path.join(IMAGE_PATH, 'small_basket.jpg'))
 
-    basket_image = pygame.image.load('../res/Images/small_basket.jpg')
-
-    egg_images = ['../res/Images/1.jpg', '../res/Images/2.jpg', '../res/Images/3.jpg', '../res/Images/4.jpg',
-                  '../res/Images/5.jpg', '../res/Images/6.jpg', '../res/Images/7.gif', '../res/Images/8.jpg',
-                  '../res/Images/9.jpg', '../res/Images/bomb.png']
+    egg_images_raw = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.gif', '8.jpg', '9.jpg', 'bomb.png']
+    egg_images = [os.path.join(IMAGE_PATH, i) for i in egg_images_raw]
 
     bomb_image = pygame.image.load(egg_images[9])
 
-    basket = pygame.image.load('../res/Images/basket.JPG')
+    basket = pygame.image.load(os.path.join(IMAGE_PATH, 'basket.JPG'))
 
     minion = pygame.image.load(egg_images[7])
 
-    explosion = pygame.image.load('../res/Images/explosion.gif')
+    explosion = pygame.image.load(os.path.join(IMAGE_PATH, 'explosion.gif'))
 
     # Initializing the speed variable which denotes the speed with which the images move.
 
@@ -152,7 +157,7 @@ def game_play():
     # Setting white background to the game window
     gameDisplay.fill((255, 255, 255))
 
-    pygame.mixer.music.load('../res/Songs/game_music.wav')
+    pygame.mixer.music.load(os.path.join(RESOURCE_PATH, 'Songs', 'game_music.wav'))
 
     pygame.mixer.music.play(-1)
 

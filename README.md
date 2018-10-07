@@ -25,11 +25,13 @@ There is also a provision to check out the highest score which is implemented us
   
   ## Screenshots 
   
-  ![Main Menu](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/menu.JPG)
+  ![Main Menu](https://raw.githubusercontent.com/gahan9/Catch-It/master/res/Images/demo/start.gif)
   
-  ![Instructions](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/instructions.JPG) 
+  ![Instructions](https://raw.githubusercontent.com/gahan9/Catch-It/master/res/Images/demo/instructions.gif) 
   
-  ![High Score](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/high_score.JPG)
+  ![High Score](https://raw.githubusercontent.com/gahan9/Catch-It/master/res/Images/demo/best_scores.gif)
+  
+  ![High Score](https://raw.githubusercontent.com/gahan9/Catch-It/master/res/Images/demo/gameplay.gif)
   
   ![Crashed](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/crashed.JPG) 
   
