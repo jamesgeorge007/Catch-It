@@ -23,7 +23,7 @@ There is also a provision to check out the highest score which is implemented us
 
 > **The MIT License**
   
-  ## Screenshots 
+  ## Demo
   
   ![Main Menu](https://raw.githubusercontent.com/gahan9/Catch-It/master/res/Images/demo/start.gif)
   
@@ -32,6 +32,8 @@ There is also a provision to check out the highest score which is implemented us
   ![High Score](https://raw.githubusercontent.com/gahan9/Catch-It/master/res/Images/demo/best_scores.gif)
   
   ![High Score](https://raw.githubusercontent.com/gahan9/Catch-It/master/res/Images/demo/gameplay.gif)
+  
+  ## Screenshots
   
   ![Crashed](https://github.com/jamesgeorge007/Catch-It-Egg-Catching-Game-in-Python/blob/master/res/Screenshots/crashed.JPG) 
   
